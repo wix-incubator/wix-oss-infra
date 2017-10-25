@@ -1,5 +1,5 @@
 def resources(runtime_deps=[], visibility=None):
-    java_library(
+    native.java_library(
         name = "resources",
         resources = native.glob(["**"],exclude=["BUILD"]),
         resource_strip_prefix = "%s/"%PACKAGE_NAME,
