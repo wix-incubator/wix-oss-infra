@@ -15,6 +15,13 @@ def maven_archive(name, artifact):
       build_file_content = 'filegroup(name = "archive", srcs = glob(["**/*"],exclude=["BUILD.bazel","WORKSPACE","*.zip","*.tar.gz"]), visibility = ["//visibility:public"])'
   )
 
+def maven_proto(name, artifact):
+  native.new_http_archive(
+      name = name,
+      url = _convert_to_url(artifact),
+      build_file_content = 'proto_library(name = "proto", srcs = glob(["**/*.proto"]), visibility = ["//visibility:public"])'
+  )
+
 def _convert_to_url(artifact):
     parts = artifact.split(":")
     group_id_part = parts[0].replace(".","/")
