@@ -13,7 +13,9 @@ def maven_archive(name, artifact):
   native.new_http_archive(
       name = name,
       url = _convert_to_url(artifact),
-      build_file_content = 'filegroup(name = "archive", srcs = glob(["**/*"],exclude=["BUILD.bazel","WORKSPACE","*.zip","*.tar.gz"]), visibility = ["//visibility:public"])'
+      build_file_content = """filegroup(name = "unpacked", srcs = glob(["**/*"],exclude=["BUILD.bazel","WORKSPACE","*.zip","*.tar.gz"]), visibility = ["//visibility:public"])
+filegroup(name = "archive", srcs = glob(["*.zip","*.tar.gz"]), visibility = ["//visibility:public"])
+"""
   )
 
 def maven_proto(name, artifact):
