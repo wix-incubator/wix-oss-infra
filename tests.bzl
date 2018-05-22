@@ -43,16 +43,16 @@ def specs2_mixed_test(block_network = True, **kwargs):
   )
 
 def _add_test_target(prefixes, suffixes, test_tags, block_network, **kwargs):
-   scala_specs2_junit_test(
-       prefixes = kwargs.pop("prefixes", prefixes),
-       suffixes = kwargs.pop("suffixes", suffixes),
-       tags = _test_tags(test_tags, kwargs.pop("tags", []), block_network),
-       **kwargs
-   )
+  scala_specs2_junit_test(
+      prefixes = kwargs.pop("prefixes", prefixes),
+      suffixes = kwargs.pop("suffixes", suffixes),
+      tags = _test_tags(kwargs.pop("tags", test_tags), block_network),
+      **kwargs
+  )
 
-def _test_tags(test_tags, given_tags, block_network):
+def _test_tags(test_tags, block_network):
   tags = []
   if (block_network):
     tags = ["block-network"]
 
-  return tags + test_tags + given_tags
+  return tags + test_tags
