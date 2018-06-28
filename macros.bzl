@@ -22,7 +22,8 @@ def maven_proto(name, artifact):
   native.new_http_archive(
       name = name,
       url = _convert_to_url(artifact),
-      build_file_content = 'proto_library(name = "proto", srcs = glob(["**/*.proto"]), visibility = ["//visibility:public"])'
+      build_file_content = """load("@server-infra//src/main/rules:wix_scala_proto_repositories.bzl", "WIX_PROTOS")
+proto_library(name = "proto", srcs = glob(["**/*.proto"]), deps = WIX_PROTOS, visibility = ["//visibility:public"])"""
   )
 
 def _convert_to_url(artifact):
