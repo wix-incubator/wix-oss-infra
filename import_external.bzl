@@ -14,6 +14,7 @@ def wix_scala_maven_import_external(name, artifact, **kwargs):
               name = name,
               artifact = artifact,
               licenses = ["notice"],  # Apache 2.0
-              server_urls = ["http://repo.dev.wixpress.com/artifactory/libs-snapshots"],
+              server_urls = ["http://repo.dev.wixpress.com/artifactory/libs-snapshots",
+                             "http://repo.dev.wixpress.com/artifactory/libs-releases",],
               **kwargs
           )
