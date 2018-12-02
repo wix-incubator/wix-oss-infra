@@ -45,15 +45,3 @@ def _convert_to_url(artifact):
     url_suffix = group_id_part+"/"+artifact_id + "/" + version + "/" + final_name
     url_prefix = "https://repo.dev.wixpress.com/artifactory/libs-snapshots/"
     return url_prefix + url_suffix
-
-
-def _package_visibility():
-    return ["//{p}:__pkg__".format(p=native.package_name())]
-
-
-def sources(visbility = _package_visibility()):
-    native.filegroup(
-       name = "sources",
-       srcs = native.glob(["*.java"]) + native.glob(["*.scala"]),
-       visibility = visbility,
-    )
