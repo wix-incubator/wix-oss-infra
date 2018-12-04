@@ -1,3 +1,5 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 def resources(runtime_deps=[], testonly = 0, visibility=None):
     native.java_library(
         name = "resources",
@@ -10,7 +12,7 @@ def resources(runtime_deps=[], testonly = 0, visibility=None):
 
 
 def maven_archive(name, artifact):
-  native.new_http_archive(
+  http_archive(
       name = name,
       url = _convert_to_url(artifact),
       build_file_content = """filegroup(name = "unpacked", srcs = glob(["**/*"],exclude=["BUILD.bazel","WORKSPACE","*.zip","*.tar.gz"]), visibility = ["//visibility:public"])
@@ -19,7 +21,7 @@ filegroup(name = "archive", srcs = glob(["*.zip","*.tar.gz"]), visibility = ["//
   )
 
 def maven_proto(name, artifact):
-  native.new_http_archive(
+  http_archive(
       name = name,
       url = _convert_to_url(artifact),
       build_file_content = """load("@server_infra//framework/grpc/generator-bazel/src/main/rules:wix_scala_proto_repositories.bzl", "WIX_PROTOS")
