@@ -25,6 +25,10 @@ def specs2_unit_test(**kwargs):
   )
 
 def specs2_ite2e_test(block_network = True, **kwargs):
+  args = dict(kwargs)
+  args["size"] = args.pop("size", "large")
+  args["timeout"] = args.pop("timeout", "moderate")
+  
   _add_test_target(
       _it_prefixes,
       _it_suffixes,
@@ -34,6 +38,10 @@ def specs2_ite2e_test(block_network = True, **kwargs):
   )
 
 def specs2_mixed_test(block_network = True, **kwargs):
+  args = dict(kwargs)
+  args["size"] = args.pop("size", "large")
+  args["timeout"] = args.pop("timeout", "moderate")
+  
   _add_test_target(
       _mixed_prefixes,
       _mixed_suffixes,
