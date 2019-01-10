@@ -14,7 +14,12 @@ def safe_wix_scala_maven_import_external(name, artifact, **kwargs):
 
 def wix_scala_maven_import_external(name, artifact, **kwargs):
   fetch_sources = kwargs.get("srcjar_sha256") != None
+  wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kwargs)
 
+def wix_snapshot_scala_maven_import_external(name, artifact, **kwargs):
+  wix_scala_maven_import_external_sources(name, artifact, True, **kwargs)
+  
+def wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kwargs):
   scala_maven_import_external(
       name = name,
       artifact = artifact,
