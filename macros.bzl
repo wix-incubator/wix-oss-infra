@@ -20,12 +20,12 @@ filegroup(name = "archive", srcs = glob(["*.zip","*.tar.gz"]), visibility = ["//
 """
   )
 
-def maven_proto(name, artifact):
+def maven_proto(name, artifact, deps = []):
   http_archive(
       name = name,
       url = _convert_to_url(artifact),
       build_file_content = """load("@server_infra//framework/grpc/generator-bazel/src/main/rules:wix_scala_proto_repositories.bzl", "WIX_PROTOS")
-proto_library(name = "proto", srcs = glob(["**/*.proto"]), deps = WIX_PROTOS, visibility = ["//visibility:public"])"""
+proto_library(name = "proto", srcs = glob(["**/*.proto"]), deps = {deps} + WIX_PROTOS, visibility = ["//visibility:public"])""".format(deps = deps)
   )
 
 def _convert_to_url(artifact):
