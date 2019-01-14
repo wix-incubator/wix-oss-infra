@@ -12,35 +12,14 @@ def safe_wix_scala_maven_import_external(name, artifact, **kwargs):
         )
 
 
-def _coordinates_do_not_contain(artifact, keyword):
-  return (artifact.find(keyword) == -1)
+def wix_scala_maven_import_external(name, artifact, **kwargs):
+  fetch_sources = kwargs.get("srcjar_sha256") != None
+  wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kwargs)
 
-def _contains_sources_by_heuristic(artifact):
-  return _coordinates_do_not_contain(artifact, "-dependencies") and _coordinates_do_not_contain(artifact, "-erb")
-
-def wix_scala_maven_import_external(name, artifact, fetch_sources_override = True, enable_sources_filter_heuristic = True, **kwargs):
-  """Downloads external maven artifacts
-
-  Args:
-    name: a canonical name of the external repository. 
-      Expected to be $groupId_$artifactId where `.`/`-` are replaced with `_`.
-    artifact: maven coordinates
-    fetch_sources_override: allows opting out of source downloading (i.e. if artifact doesn't have sources)
-    enable_sources_filter_heuristic: allows opting out of filtering of artifacts with "-dependencies" or "-erb". Those are filtered out of source downloading by default since by and large they don't have sources.
-
-  """
-  source_jar_has_sha = (kwargs.get("srcjar_sha256") != None)
-  wix_snapshot_artifact = (artifact.endswith("SNAPSHOT"))
-
-  fetch_sources = \
-    fetch_sources_override and \
-    (source_jar_has_sha or \
-      (wix_snapshot_artifact and \
-       enable_sources_filter_heuristic and \
-       _contains_sources_by_heuristic(artifact)
-      )
-    )
-
+def wix_snapshot_scala_maven_import_external(name, artifact, **kwargs):
+  wix_scala_maven_import_external_sources(name, artifact, True, **kwargs)
+  
+def wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kwargs):
   scala_maven_import_external(
       name = name,
       artifact = artifact,
