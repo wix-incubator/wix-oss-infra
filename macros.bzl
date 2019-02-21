@@ -1,8 +1,8 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-def resources(runtime_deps=[], testonly = 0, visibility=None):
+def resources(name = "resources", runtime_deps=[], testonly = 0, visibility=None):
     native.java_library(
-        name = "resources",
+        name = name,
         resources = native.glob(["**"],exclude=["BUILD"]),
         resource_strip_prefix = "%s/" % native.package_name(),
         runtime_deps = runtime_deps,
