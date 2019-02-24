@@ -1,7 +1,7 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-rules_scala_version="7c9b3b0bb4abafb0bf9585bb78b17b96d462754b" # update this as needed
-rules_scala_version_sha256="72cc42db104fb18ac64f634c44e08ab8e376833c8e8559bc80a946c38deec9ab"
+rules_scala_version="990c7cf35796dcb578c8e5907c5b186246b234ea" # update this as needed
+rules_scala_version_sha256="8c34742e2a53cc00e3d34b3c423eff27ad88ca9da9b820f632dc6cbd13006ff2"
 
 def rules_scala():
   if native.existing_rule("io_bazel_rules_scala") == None:
