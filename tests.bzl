@@ -27,8 +27,8 @@ def specs2_unit_test(**kwargs):
   )
 
 def specs2_ite2e_test(block_network = True, **kwargs):
+  timeout = kwargs.pop("timeout", _default_moderate_timeout_or_implied_from_size_attr(kwargs))
   size = kwargs.pop("size", "large")
-  timeout = kwargs.pop("timeout", "moderate")
 
   _add_test_target(
       _it_prefixes,
@@ -41,8 +41,8 @@ def specs2_ite2e_test(block_network = True, **kwargs):
   )
 
 def specs2_mixed_test(block_network = True, **kwargs):
+  timeout = kwargs.pop("timeout", _default_moderate_timeout_or_implied_from_size_attr(kwargs))
   size = kwargs.pop("size", "large")
-  timeout = kwargs.pop("timeout", "moderate")
 
   _add_test_target(
       _mixed_prefixes,
@@ -112,3 +112,10 @@ def _test_tags(test_tags, block_network):
     tags = ["block-network"]
 
   return tags + test_tags
+
+def _default_moderate_timeout_or_implied_from_size_attr(kwargs):
+  if 'size' in kwargs:
+    #let bazel imply timeout from the size
+    default_timeout = None
+  else:
+    default_timeout = "moderate"
