@@ -104,7 +104,16 @@ def _add_test_target(prefixes, suffixes, test_tags, block_network, size, timeout
       local = local,
       data = data,
       tags = _test_tags(user_test_tags, block_network),
+      exec_compatible_with = _constraint_by_size(size)
   )
+
+def _constraint_by_size(size):
+  large_machine_constraint = None
+
+  if size in ["large", "enormous"]:
+    return large_machine_constraint
+  else:
+    return None
 
 def _test_tags(test_tags, block_network):
   tags = []
