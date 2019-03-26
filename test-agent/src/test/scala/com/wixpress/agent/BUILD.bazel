@@ -1,0 +1,59 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@io_bazel_rules_scala//specs2:specs2_junit.bzl", "specs2_junit_dependencies")
+
+_specs2_deps = specs2_junit_dependencies() + [
+    "//external:io_bazel_rules_scala/dependency/junit/junit"
+]
+
+scala_library(
+    name = "matchers",
+    srcs = [
+        "TestAgentMatchers.scala",
+    ],
+    deps = _specs2_deps
+)
+
+
+scala_library(
+    name = "abstract_test",
+    srcs = [
+        "AbstractTestAgentTest.scala",
+    ],
+    deps = _specs2_deps + [":matchers"]
+)
+
+
+
+specs2_unit_test(
+    name = "test-agent",
+    deps = [
+        ":abstract_test",
+        ":matchers"
+    ],
+    srcs = [
+        "TestAgentTest.scala",
+    ],
+)
+
+specs2_unit_test(
+    name = "test-agent-override",
+    deps = [
+        ":abstract_test",
+        ":matchers"
+    ],
+    extra_runtime_dirs = [
+        "dir-a",
+        "dir-b/dir-c",
+    ],
+    extra_runtime_entries = [
+        "dir-a",
+        "test-agent/src/test/resources"
+    ],
+    srcs = [
+        "TestAgentOverrideTest.scala",
+    ],
+    data = [
+        "//test-agent/src/test/resources:test_files"
+    ]
+)
