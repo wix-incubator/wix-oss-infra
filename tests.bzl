@@ -1,5 +1,8 @@
 load("@io_bazel_rules_scala//scala:scala.bzl", "scala_specs2_junit_test","scala_library")
 load("@io_bazel_rules_scala//specs2:specs2_junit.bzl", "specs2_junit_dependencies")
+
+target_test_classes = "target/test-classes"
+
 _unit_prefixes = ["Test"]
 _unit_suffixes = _unit_prefixes
 _unit_tags = ["UT"]
@@ -12,7 +15,9 @@ _mixed_prefixes = _unit_prefixes + _it_prefixes
 _mixed_suffixes = _mixed_prefixes
 _mixed_tags = _unit_tags + _it_tags
 
-def specs2_unit_test(**kwargs):
+def specs2_unit_test(extra_runtime_dirs = [target_test_classes],
+                     extra_runtime_entries = [target_test_classes],
+                     **kwargs):
   size = kwargs.pop("size", "small")
   timeout = kwargs.pop("timeout", None)
 
@@ -23,10 +28,15 @@ def specs2_unit_test(**kwargs):
       False,
       size,
       timeout,
+      extra_runtime_dirs,
+      extra_runtime_entries,
       **kwargs
   )
 
-def specs2_ite2e_test(block_network = True, **kwargs):
+def specs2_ite2e_test(block_network = True,
+                      extra_runtime_dirs = [target_test_classes],
+                      extra_runtime_entries = [target_test_classes],
+                      **kwargs):
   timeout = kwargs.pop("timeout", _default_moderate_timeout_or_implied_from_size_attr(kwargs))
   size = kwargs.pop("size", "large")
 
@@ -37,10 +47,15 @@ def specs2_ite2e_test(block_network = True, **kwargs):
       block_network,
       size,
       timeout,
+      extra_runtime_dirs,
+      extra_runtime_entries,
       **kwargs
   )
 
-def specs2_mixed_test(block_network = True, **kwargs):
+def specs2_mixed_test(block_network = True,
+                      extra_runtime_dirs = [target_test_classes],
+                      extra_runtime_entries = [target_test_classes],
+                      **kwargs):
   timeout = kwargs.pop("timeout", _default_moderate_timeout_or_implied_from_size_attr(kwargs))
   size = kwargs.pop("size", "large")
 
@@ -51,24 +66,45 @@ def specs2_mixed_test(block_network = True, **kwargs):
       block_network,
       size,
       timeout,
+      extra_runtime_dirs,
+      extra_runtime_entries,
       **kwargs
   )
 
-def _add_test_target(prefixes, suffixes, test_tags, block_network, size, timeout, **kwargs):
+def _add_test_target(prefixes,
+                     suffixes,
+                     test_tags,
+                     block_network,
+                     size,
+                     timeout,
+                     extra_runtime_dirs,
+                     extra_runtime_entries,
+                     **kwargs):
   #extract attribute(s) common to both test and scala_library
   name = kwargs.pop("name")
   user_test_tags = kwargs.pop("tags", test_tags)
   #Bazel idiomatic wise `data` is needed in both.
   #(scala_library for other tests that might need the data in the runfiles and the test needs it so that it can do $location expansion)
-  data = kwargs.pop("data", None)
+  data = kwargs.pop("data", [])
   #extract attributes which are only for the test runtime
   end_prefixes = kwargs.pop("prefixes", prefixes)
   end_suffixes = kwargs.pop("suffixes", suffixes)
-  jvm_flags = kwargs.pop("jvm_flags", None)
+  jvm_flags = kwargs.pop("jvm_flags", [])
   flaky = kwargs.pop("flaky", None)
   shard_count = kwargs.pop("shard_count", None)
   args = kwargs.pop("args", None)
   local = kwargs.pop("local", None)
+  deps = kwargs.pop("deps",[])
+
+  jvm_flags.extend([
+      "-javaagent:$(rootpath @wix_oss_infra//test-agent/src/main/java/com/wixpress/agent:test-agent_deploy.jar)",
+      "-Dextra.dirs=" + ":".join(extra_runtime_dirs),
+  ])
+
+  if extra_runtime_entries:
+    jvm_flags.append("-Xbootclasspath/a:" + ":".join(extra_runtime_entries))
+
+  data.append("@wix_oss_infra//test-agent/src/main/java/com/wixpress/agent:test-agent_deploy.jar")
 
   #mitigate issue where someone explicitly adds testonly in their kwargs and so we get it twice
   testonly = kwargs.pop("testonly", 1)
@@ -78,13 +114,12 @@ def _add_test_target(prefixes, suffixes, test_tags, block_network, size, timeout
     "//external:io_bazel_rules_scala/dependency/hamcrest/hamcrest_core",
   ]
 
-  user_deps = kwargs.pop("deps",[])
   scala_library(
       name = name,
       tags = user_test_tags,
       data = data,
       testonly = testonly,
-      deps = junit_specs2_deps + user_deps,
+      deps = junit_specs2_deps + deps,
       **kwargs
   )
 
@@ -92,7 +127,7 @@ def _add_test_target(prefixes, suffixes, test_tags, block_network, size, timeout
       name = name + "_test_runner",
       prefixes = end_prefixes,
       suffixes = end_suffixes,
-      deps = user_deps,
+      deps = deps,
       runtime_deps = [":" + name],
       tests_from = [":" + name],
       jvm_flags = jvm_flags,
@@ -128,3 +163,4 @@ def _default_moderate_timeout_or_implied_from_size_attr(kwargs):
     default_timeout = None
   else:
     default_timeout = "moderate"
+
