@@ -1,13 +1,13 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-rules_scala_version="53b14d06df37e5bab57d7aae62a2934d7efcc3a5" # update this as needed
-rules_scala_version_sha256="5ae91cf64163b9bf25b7bfa16ae09bfb551b80700bc5be73d5b22041185614a1"
+rules_scala_version="c904132da6bb421a9106c79dd02bb31f228994b9" # update this as needed
+rules_scala_version_sha256="1f287926bab41b95ef6757a3f4d5c935c8f0dbfcdd82c8e8e209859115385a3a"
 
 def rules_scala():
   if native.existing_rule("io_bazel_rules_scala") == None:
       http_archive(
                  name = "io_bazel_rules_scala",
-                 url = "https://github.com/wix/rules_scala/archive/%s.zip"%rules_scala_version,
+                 url = "https://github.com/bazelbuild/rules_scala/archive/%s.zip"%rules_scala_version,
                  type = "zip",
                  strip_prefix= "rules_scala-%s" % rules_scala_version,
                  sha256 = rules_scala_version_sha256,
