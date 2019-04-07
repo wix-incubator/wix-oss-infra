@@ -1,5 +1,6 @@
 load("@io_bazel_rules_scala//scala:scala.bzl", "scala_specs2_junit_test","scala_library")
 load("@io_bazel_rules_scala//specs2:specs2_junit.bzl", "specs2_junit_dependencies")
+load("@test_network_sandboxing//:network_sandboxing.bzl", "network_sandboxing")
 
 target_test_classes = "target/test-classes"
 
@@ -153,7 +154,7 @@ def _constraint_by_size(size):
 def _test_tags(test_tags, block_network):
   tags = []
   if (block_network):
-    tags = ["block-network"]
+    tags = network_sandboxing
 
   return tags + test_tags
 
