@@ -3,23 +3,25 @@ load("@io_bazel_rules_scala//scala:scala_maven_import_external.bzl", "scala_mave
 _default_server_urls = ["http://repo.dev.wixpress.com/artifactory/libs-snapshots",
                         "http://repo.dev.wixpress.com/artifactory/libs-releases",]
 
+
 def safe_wix_scala_maven_import_external(name, artifact, **kwargs):
-  if native.existing_rule(name) == None:
-        wix_scala_maven_import_external(
-            name = name,
-            artifact = artifact,
-            **kwargs
-        )
+    if native.existing_rule(name) == None:
+        srcjar_sha256_exists = kwargs.get("srcjar_sha256") != None
+        snapshot_sources = kwargs.pop("snapshot_sources", 0)
+        fetch_sources = srcjar_sha256_exists or snapshot_sources
+        _wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kwargs)
 
-
+# depracated in favour of combined_wix_scala_maven_import_external
 def wix_scala_maven_import_external(name, artifact, **kwargs):
   fetch_sources = kwargs.get("srcjar_sha256") != None
-  wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kwargs)
+  _wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kwargs)
 
+# depracated in favour of combined_wix_scala_maven_import_external
 def wix_snapshot_scala_maven_import_external(name, artifact, **kwargs):
-  wix_scala_maven_import_external_sources(name, artifact, True, **kwargs)
-  
-def wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kwargs):
+  _wix_scala_maven_import_external_sources(name, artifact, True, **kwargs)
+
+
+def _wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kwargs):
   scala_maven_import_external(
       name = name,
       artifact = artifact,
