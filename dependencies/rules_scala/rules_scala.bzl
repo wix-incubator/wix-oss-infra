@@ -1,8 +1,8 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@core_server_build_tools//dependencies/test_network_sandboxing:download_network_sandboxing.bzl", "download_network_sandboxing_according_to_os")
 
-rules_scala_version="14d9742496859faaf860b1adfc8126f3ed077921" # update this as needed
-rules_scala_version_sha256="d5fcd504a6eafb6d77ee5cd8b457d9678c313f38ef2f1da71246307132a9d6c8"
+rules_scala_version="8f006056990307cbd8320c97a59cd09c821011d8" # update this as needed
+rules_scala_version_sha256="e85c1d64520554e0dcdfe828e16ff604de0774b0c68dbb0e90ffab1a6b045adf"
 
 def rules_scala():
 
