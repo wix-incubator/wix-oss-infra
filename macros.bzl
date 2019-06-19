@@ -14,7 +14,7 @@ def resources(name = "resources", runtime_deps=[], testonly = 0, visibility=None
 def maven_archive(name, artifact):
   http_archive(
       name = name,
-      url = _convert_to_url(artifact),
+      urls = _convert_to_url(artifact),
       build_file_content = """filegroup(name = "unpacked", srcs = glob(["**/*"],exclude=["BUILD.bazel","WORKSPACE","*.zip","*.tar.gz"]), visibility = ["//visibility:public"])
 filegroup(name = "archive", srcs = glob(["*.zip","*.tar.gz"]), visibility = ["//visibility:public"])
 """
@@ -23,7 +23,7 @@ filegroup(name = "archive", srcs = glob(["*.zip","*.tar.gz"]), visibility = ["//
 def maven_proto(name, artifact, deps = []):
   http_archive(
       name = name,
-      url = _convert_to_url(artifact),
+      urls = _convert_to_url(artifact),
       build_file_content = """load("@server_infra//framework/grpc/generator-bazel/src/main/rules:wix_scala_proto_repositories.bzl", "WIX_PROTOS")
 proto_library(name = "proto", srcs = glob(["**/*.proto"]), deps = {deps} + WIX_PROTOS, visibility = ["//visibility:public"])""".format(deps = deps)
   )
@@ -45,8 +45,9 @@ def _convert_to_url(artifact):
 
     final_name = artifact_id + "-" + version + classifier_part + "." + packaging
     url_suffix = group_id_part+"/"+artifact_id + "/" + version + "/" + final_name
-    url_prefix = "https://repo.dev.wixpress.com/artifactory/libs-snapshots/"
-    return url_prefix + url_suffix
+    url_prefix = "https://repo.dev.wixpress.com/artifactory/%s/"
+    return [url_prefix % "libs-snapshots" + url_suffix,
+            url_prefix % "libs-releases" + url_suffix,]
 
 
 def _package_visibility(pacakge_name):
