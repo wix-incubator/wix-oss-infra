@@ -20,3 +20,14 @@ def google_protobuf():
         strip_prefix = "protobuf-%s" % protobuf_version,
         sha256 = protobuf_version_sha256,
       )
+
+  native.bind(
+    name = "io_bazel_rules_scala/dependency/proto/grpc_deps",
+    actual = "@server_infra//framework/grpc/generator-bazel/src/main/rules:wix_grpc_dependencies",
+  )
+
+  native.bind(
+    name = "io_bazel_rules_scala/dependency/proto/implicit_compile_deps",
+    actual = "@server_infra//framework/grpc/generator-bazel/src/main/rules:wix_implicit_gen_dependencies",
+  )
+  native.register_toolchains("@server_infra//framework/grpc/generator-bazel/src/main/rules:wix_scalapb_toolchain")
