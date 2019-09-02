@@ -1,8 +1,8 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@wix_oss_infra//dependencies/test_network_sandboxing:download_network_sandboxing.bzl", "download_network_sandboxing_according_to_os")
 
-rules_scala_version="0d8b2d720277cbbadd804b2ef39ecf2a92cd7278" # update this as needed
-rules_scala_version_sha256="22ee1092f6267471f7d2e84aca62ab49fb952d44de256d45354bdbc53186740d"
+rules_scala_version="533c8b8c6833fcaf7b9c9174d4b1eed812d095fb" # update this as needed
+rules_scala_version_sha256="387387d19ac7b1efa1caeebf40e0df1adbf31eebd024b93b3ba1f85a887ac28a"
 
 def rules_scala():
 
@@ -12,7 +12,7 @@ def rules_scala():
   if native.existing_rule("io_bazel_rules_scala") == None:
       http_archive(
                  name = "io_bazel_rules_scala",
-                 url = "https://github.com/bazelbuild/rules_scala/archive/%s.zip"%rules_scala_version,
+                 url = "https://github.com/wix/rules_scala/archive/%s.zip"%rules_scala_version,
                  type = "zip",
                  strip_prefix= "rules_scala-%s" % rules_scala_version,
                  sha256 = rules_scala_version_sha256,
