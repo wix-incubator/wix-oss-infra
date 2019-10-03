@@ -23,13 +23,21 @@ scala_library(
     deps = _specs2_deps + [":matchers"]
 )
 
-
+java_library(
+    name = "txt_files",
+    resources = ["//test-agent/src/test/resources:test_files"],
+    resource_strip_prefix = "test-agent/src/test/resources/",
+)
 
 specs2_unit_test(
     name = "test-agent",
     deps = [
         ":abstract_test",
-        ":matchers"
+        ":matchers",
+        ":txt_files"
+    ],
+    data = [
+
     ],
     srcs = [
         "TestAgentTest.scala",
