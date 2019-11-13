@@ -59,7 +59,7 @@ def sources(visibility = None):
       visibility = _package_visibility(native.package_name())
     native.filegroup(
        name = "sources",
-       srcs = native.glob(["*.java"]) + native.glob(["*.scala"]),
+       srcs = native.glob(["*.java"], allow_empty=True) + native.glob(["*.scala"], allow_empty=True),
        visibility = visibility,
     )
 
