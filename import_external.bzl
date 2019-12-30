@@ -1,4 +1,4 @@
-load("@io_bazel_rules_scala//scala:scala_maven_import_external.bzl", "scala_maven_import_external", "scala_import_external")
+load("@io_bazel_rules_scala//scala:scala_maven_import_external.bzl", "scala_maven_import_external")
 
 _default_server_urls = ["https://repo.maven.apache.org/maven2/",
                         "https://mvnrepository.com/artifact",]
@@ -19,7 +19,6 @@ def wix_scala_maven_import_external(name, artifact, **kwargs):
 # depracated in favour of combined_wix_scala_maven_import_external
 def wix_snapshot_scala_maven_import_external(name, artifact, **kwargs):
   _wix_scala_maven_import_external_sources(name, artifact, True, **kwargs)
-
 
 def _wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kwargs):
   scala_maven_import_external(
