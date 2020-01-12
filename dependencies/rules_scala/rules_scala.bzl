@@ -1,13 +1,9 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("@core_server_build_tools//dependencies/test_network_sandboxing:download_network_sandboxing.bzl", "download_network_sandboxing_according_to_os")
 
 rules_scala_version="886bc9cf6d299545510b39b4872bbb5dc7526cb3" # update this as needed
 rules_scala_version_sha256="4fdf8506af2e2f1c32605b1f1d20928370640948aa144ef97b8e3bf77404320c"
 
 def rules_scala():
-
-  if native.existing_rule("test_network_sandboxing") == None:
-      download_network_sandboxing_according_to_os(name = "test_network_sandboxing")
 
   if native.existing_rule("io_bazel_rules_scala") == None:
       http_archive(
