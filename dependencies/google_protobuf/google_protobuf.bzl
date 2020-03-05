@@ -1,7 +1,7 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-protobuf_version="09745575a923640154bcf307fba8aedff47f240a"
-protobuf_version_sha256="416212e14481cff8fd4849b1c1c1200a7f34808a54377e22d7447efdf54ad758"
+protobuf_version="3.11.2"
+protobuf_version_sha256="e8c7601439dbd4489fe5069c33d374804990a56c2f710e00227ee5d8fd650e67"
 
 def google_protobuf():
   if native.existing_rule("zlib") == None:
@@ -16,7 +16,7 @@ def google_protobuf():
   if native.existing_rule("com_google_protobuf") == None:
       http_archive(
         name = "com_google_protobuf",
-        url = "https://github.com/protocolbuffers/protobuf/archive/%s.tar.gz" % protobuf_version,
+        url = "https://github.com/protocolbuffers/protobuf/archive/v%s.tar.gz" % protobuf_version,
         strip_prefix = "protobuf-%s" % protobuf_version,
         sha256 = protobuf_version_sha256,
       )
