@@ -17,7 +17,7 @@ scala_toolchain(
         "-Ywarn-unused",
         "-Ywarn-macros:after",
     ],
-    plus_one_deps_mode = "on",
+    dependency_mode = "plus-one",
     scalac_provider_attr = "@wix_oss_infra//toolchains:scalac_default",
     visibility = ["//visibility:public"],
 )
