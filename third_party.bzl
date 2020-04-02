@@ -1,3 +1,15 @@
+load("//:third_party/commons_cli.bzl", commons_cli_deps = "dependencies")
+
+load("//:third_party/com_thoughtworks_paranamer.bzl", com_thoughtworks_paranamer_deps = "dependencies")
+
+load("//:third_party/com_fasterxml_jackson_module.bzl", com_fasterxml_jackson_module_deps = "dependencies")
+
+load("//:third_party/com_fasterxml_jackson_datatype.bzl", com_fasterxml_jackson_datatype_deps = "dependencies")
+
+load("//:third_party/com_fasterxml_jackson_dataformat.bzl", com_fasterxml_jackson_dataformat_deps = "dependencies")
+
+load("//:third_party/com_github_luben.bzl", com_github_luben_deps = "dependencies")
+
 load("//:third_party/org_javassist.bzl", org_javassist_deps = "dependencies")
 
 load("//:third_party/org_apache_curator.bzl", org_apache_curator_deps = "dependencies")
@@ -108,3 +120,21 @@ def managed_third_party_dependencies():
 
 
   org_javassist_deps()
+
+
+  com_github_luben_deps()
+
+
+  com_fasterxml_jackson_dataformat_deps()
+
+
+  com_fasterxml_jackson_datatype_deps()
+
+
+  com_fasterxml_jackson_module_deps()
+
+
+  com_thoughtworks_paranamer_deps()
+
+
+  commons_cli_deps()
