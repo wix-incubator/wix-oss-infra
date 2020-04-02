@@ -16,7 +16,7 @@ def dependencies():
             "@com_yammer_metrics_metrics_core",
             "@commons_cli_commons_cli",
             "@net_sf_jopt_simple_jopt_simple",
-            "@org_apache_kafka_kafka_clients",
+            "@org_apache_kafka_kafka_clients241",
             "@org_apache_zookeeper_zookeeper",
             "@org_scala_lang_modules_scala_collection_compat_2_12",
             "@org_scala_lang_modules_scala_java8_compat_2_12",
