@@ -3,7 +3,7 @@ load("@wix_oss_infra//:import_external.bzl", import_external = "safe_wix_scala_m
 def dependencies():
 
     import_external(
-        name = "org_apache_kafka_kafka_2_12",
+        name = "org_apache_kafka_kafka241_2_12",
         artifact = "org.apache.kafka:kafka_2.12:2.4.1",
         artifact_sha256 = "6e400cfc173270ec5cba4fdc43d9ba6741c31af25690d7a5aba89a91ca092e17",
         srcjar_sha256 = "2941b38dc81fe28845923223729ecc05b2a59cb7ab9bdc512dc1c3cfd3783004",
@@ -29,7 +29,7 @@ def dependencies():
 
 
     import_external(
-        name = "org_apache_kafka_kafka_clients",
+        name = "org_apache_kafka_kafka_clients241",
         artifact = "org.apache.kafka:kafka-clients:2.4.1",
         artifact_sha256 = "a2be15ae6d354b769713ae0cbb3184f225aa16fc98205b1eb24afd9fc2a360d9",
         srcjar_sha256 = "0a77a1ec82621ddcec02e8d2d2b38a5f3324b867afd80038b006ffe30f99091d",
