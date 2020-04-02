@@ -1,8 +1,8 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@wix_oss_infra//dependencies/test_network_sandboxing:download_network_sandboxing.bzl", "download_network_sandboxing_according_to_os")
 
-rules_scala_version="5a55e5197f9e74963d98dbbed2e6d967b75aa29a" # update this as needed
-rules_scala_version_sha256="5fd0b89bd5d56ab575c37c71d9f435395cf6d6b488d80a050dea2171e08dd3da"
+rules_scala_version="a2f5852902f5b9f0302c727eead52ca2c7b6c3e2" # update this as needed
+rules_scala_version_sha256="8c48283aeb70e7165af48191b0e39b7434b0368718709d1bced5c3781787d8e7"
 
 def rules_scala():
 
