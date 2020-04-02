@@ -1,3 +1,5 @@
+load("//:third_party/com_github_luben.bzl", com_github_luben_deps = "dependencies")
+
 load("//:third_party/org_javassist.bzl", org_javassist_deps = "dependencies")
 
 load("//:third_party/org_apache_curator.bzl", org_apache_curator_deps = "dependencies")
@@ -108,3 +110,5 @@ def managed_third_party_dependencies():
 
 
   org_javassist_deps()
+  
+  com_github_luben_deps()
