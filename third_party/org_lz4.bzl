@@ -4,7 +4,7 @@ def dependencies():
 
     import_external(
         name = "org_lz4_lz4_java",
-        artifact = "org.lz4:lz4-java:1.4.1",
-        artifact_sha256 = "f0efa5ce1318f0e3e734f35238dacc441c6510cb6f3fee6d1cfd3ebae15e2bef",
-        srcjar_sha256 = "f239c4dcb907781dd5c4d4ce7497dfd627dadcc653277ae1b4c3694c44b6d61b",
+        artifact = "org.lz4:lz4-java:1.6.0",
+        artifact_sha256 = "d229545aa2b1d5203c876614bdbcffcacc303697f4f8f26f764e1d6c1ed2e416",
+        srcjar_sha256 = "db7727c82c150cec38a422b9692f6431150ea2c0c0d0c723bdf7fe6946149041",
     )
