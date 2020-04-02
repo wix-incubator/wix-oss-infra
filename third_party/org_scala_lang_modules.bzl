@@ -37,9 +37,9 @@ def dependencies():
 
     import_external(
         name = "org_scala_lang_modules_scala_collection_compat_2_12",
-        artifact = "org.scala-lang.modules:scala-collection-compat_2.12:0.1.1",
-        artifact_sha256 = "acf79af5eac905edc6fd6dcc18f98562bf026a92f881946ceef068f7d36b9f0e",
-        srcjar_sha256 = "91b0c086d8390d57612d101a2b19f2d7bda8b06479b15648bd72993e30630354",
+        artifact = "org.scala-lang.modules:scala-collection-compat_2.12:2.1.2",
+        artifact_sha256 = "8aab3e1f9dd7bc392a2e27cf168af94fdc7cc2752131fc852192302fb21efdb4",
+        srcjar_sha256 = "2837767d00002a23888804637c3a43136723cafbd2101ca37ea286e349b9ee14",
         deps = [
             "@org_scala_lang_scala_library"
         ],
