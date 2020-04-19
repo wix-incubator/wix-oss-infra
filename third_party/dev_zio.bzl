@@ -11,6 +11,8 @@ def dependencies():
             "@dev_zio_zio_stacktracer_2_12",
             "@org_scala_lang_scala_library"
         ],
+        # this is needed for publishing maven artifacts to maven central
+        tags = ["maven_coordinates=dev.zio:zio-2.12:1.0.0-RC17"],
     )
 
 
@@ -34,6 +36,8 @@ def dependencies():
             "@dev_zio_zio_2_12",
             "@org_scala_lang_scala_library"
         ],
+        # this is needed for publishing maven artifacts to maven central
+        tags = ["maven_coordinates=dev.zio:zio-streams_2.12:1.0.0-RC17"],
     )
 
 
