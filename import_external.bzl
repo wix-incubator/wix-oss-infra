@@ -21,11 +21,13 @@ def wix_snapshot_scala_maven_import_external(name, artifact, **kwargs):
   _wix_scala_maven_import_external_sources(name, artifact, True, **kwargs)
 
 def _wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kwargs):
+  tags = kwargs.pop('tags',[])
   scala_maven_import_external(
       name = name,
       artifact = artifact,
       licenses = ["notice"],  # Apache 2.0
       fetch_sources = fetch_sources,
       server_urls = _default_server_urls,
+      tags = ["maven_coordinates=%s"%artifact] + tags,
       **kwargs
   )
