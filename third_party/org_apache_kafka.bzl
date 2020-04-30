@@ -24,8 +24,6 @@ def dependencies():
             "@org_scala_lang_scala_reflect",
             "@org_slf4j_slf4j_api"
         ],
-        # this is needed for publishing maven artifacts to maven central
-        tags = ["maven_coordinates=org.apache.kafka:kafka_2.12:2.4.1"],
       # EXCLUDES log4j:log4j
     )
 
@@ -41,8 +39,6 @@ def dependencies():
             "@org_slf4j_slf4j_api",
             "@org_xerial_snappy_snappy_java"
         ],
-        # this is needed for publishing maven artifacts to maven central
-        tags = ["maven_coordinates=org.apache.kafka:kafka-clients:2.4.1"],
       # EXCLUDES *:mail
       # EXCLUDES *:jline
       # EXCLUDES *:jms
