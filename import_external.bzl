@@ -26,6 +26,10 @@ def _wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kw
     tags = kwargs.pop("tags", [])
     excludes = kwargs.pop("excludes", [])
     aliases = kwargs.pop("aliases", [])
+
+    transitive_deps = kwargs.pop("transitive_closure_deps", [])
+    deps = kwargs.pop("deps", [])
+
     if (len(excludes)):
         tags = ["excludes=%s" % ",".join(excludes)] + tags
     scala_maven_import_external(
@@ -34,6 +38,7 @@ def _wix_scala_maven_import_external_sources(name, artifact, fetch_sources, **kw
         licenses = ["notice"],  # Apache 2.0
         fetch_sources = fetch_sources,
         server_urls = _default_server_urls,
+        deps = transitive_deps if transitive_deps != [] else deps,
         tags = ["maven_coordinates=%s" % artifact] + tags,
         **kwargs
     )
