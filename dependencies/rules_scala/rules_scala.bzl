@@ -14,10 +14,11 @@ _experimental_rules_scala_version_sha256 = "5ffa3a1c39e29fa24ff99b3f5e7f12107fc7
 RULES_SCALA_TOGGLES = {}
 
 def _rules_scala_version():
-    RULES_SCALA_TOGGLES["old_workers"] = True
     if _EXPRIMENT_ON and main_repository_name in _EXPERIMENTAL_REPOS:
+        RULES_SCALA_TOGGLES["old_workers"] = False
         return _exprimental_rules_scala_version
     else:
+        RULES_SCALA_TOGGLES["old_workers"] = True
         return _default_rules_scala_version
 
 def _rules_scala_version_sha256():
