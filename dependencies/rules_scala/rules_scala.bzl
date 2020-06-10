@@ -8,8 +8,8 @@ _default_rules_scala_version_sha256 = "5ffa3a1c39e29fa24ff99b3f5e7f12107fc78c475
 _EXPERIMENTAL_REPOS = ["wix_ci", "bazel_tooling", "core_server_build_tools"]
 _EXPRIMENT_ON = True
 
-_exprimental_rules_scala_version = "87b2f439a918efb1adb695ee662dcce03b064ea3"
-_experimental_rules_scala_version_sha256 = "5ffa3a1c39e29fa24ff99b3f5e7f12107fc78c475b7454825c580a9224044434"
+_exprimental_rules_scala_version = "fb6e0f0c9383816bddccdbb1e04c90f51a8edb89"
+_experimental_rules_scala_version_sha256 = "3bd0152f59c28947020fb9717eb57f8e5093c7abd8da361780752d4088e5ea17"
 
 RULES_SCALA_TOGGLES = {}
 
