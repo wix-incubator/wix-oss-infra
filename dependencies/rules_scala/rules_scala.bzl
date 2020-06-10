@@ -6,7 +6,7 @@ _default_rules_scala_version = "87b2f439a918efb1adb695ee662dcce03b064ea3"  # upd
 _default_rules_scala_version_sha256 = "5ffa3a1c39e29fa24ff99b3f5e7f12107fc78c475b7454825c580a9224044434"
 
 _EXPERIMENTAL_REPOS = ["wix_ci", "bazel_tooling", "core_server_build_tools"]
-_EXPRIMENT_ON = False
+_EXPRIMENT_ON = True
 
 _exprimental_rules_scala_version = "87b2f439a918efb1adb695ee662dcce03b064ea3"
 _experimental_rules_scala_version_sha256 = "5ffa3a1c39e29fa24ff99b3f5e7f12107fc78c475b7454825c580a9224044434"
