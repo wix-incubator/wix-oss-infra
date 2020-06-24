@@ -1,4 +1,4 @@
-load("@core_server_build_tools//:import_external.bzl", import_external = "safe_wix_scala_maven_import_external")
+load("@wix_oss_infra//:import_external.bzl", import_external = "safe_wix_scala_maven_import_external")
 
 def dependencies():
 
