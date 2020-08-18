@@ -103,6 +103,11 @@ def _add_test_target(prefixes,
 
   agent_flags = agent_setup_flags(extra_runtime_dirs, extra_runtime_entries)
   jvm_flags.extend(agent_flags)
+  jvm_flags.extend([
+      "-Dcom.google.testing.junit.runner.shouldInstallTestSecurityManager=false",
+      # read by wix testing framework to support different test environments 'CI' serves as a default.
+      "-Dwix.environment=CI",
+  ])
 
   if repo_jdk_version == "11":
       jvm_flags.extend(["-Djava.locale.providers=COMPAT,SPI,CLDR"])
