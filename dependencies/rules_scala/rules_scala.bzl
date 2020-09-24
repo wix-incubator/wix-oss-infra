@@ -2,11 +2,11 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@wix_oss_infra//dependencies/test_network_sandboxing:download_network_sandboxing.bzl", "download_network_sandboxing_according_to_os")
 load("@main_repository_name//:defs.bzl", "main_repository_name")
 
-_default_rules_scala_version = "fb6e0f0c9383816bddccdbb1e04c90f51a8edb89"
-_default_rules_scala_version_sha256 = "3bd0152f59c28947020fb9717eb57f8e5093c7abd8da361780752d4088e5ea17"
+_default_rules_scala_version = "db42f756f00dc8ee9f3fa3e26ea402622741dd5d"
+_default_rules_scala_version_sha256 = "2aea037e2329ed80c22d125c9c8dc7578417ab3533f91f410c8a7c2a93487148"
 
 _EXPERIMENTAL_REPOS = ["wix_ci", "bazel_tooling", "core_server_build_tools"]
-_EXPRIMENT_ON = True
+_EXPRIMENT_ON = False
 
 _exprimental_rules_scala_version = "db42f756f00dc8ee9f3fa3e26ea402622741dd5d"
 _experimental_rules_scala_version_sha256 = "2aea037e2329ed80c22d125c9c8dc7578417ab3533f91f410c8a7c2a93487148"
