@@ -120,12 +120,20 @@ def _add_test_target(prefixes,
     "//external:io_bazel_rules_scala/dependency/hamcrest/hamcrest_core",
   ]
 
+  unused_dependency_checker_ignored_targets = kwargs.pop("unused_dependency_checker_ignored_targets", [])
+  unused_dependency_checker_ignored_targets.extend([
+    "@junit_junit",
+    "@org_specs2_specs2_junit_2_12",
+    "@org_hamcrest_hamcrest_core",
+  ])
+
   scala_library(
       name = name,
       tags = user_test_tags,
       data = data,
       testonly = testonly,
       deps = junit_specs2_deps + deps,
+      unused_dependency_checker_ignored_targets = unused_dependency_checker_ignored_targets,
       **kwargs
   )
 
